@@ -145,23 +145,23 @@ connected nodes.
 
 ```java
 class Edge {
-    int u;
-    int v;
-    int weight;
+  int u;
+  int v;
+  int weight;
 
-    // Create a weighted edge (u, v).
-    Edge(int u, int v, int weight) { /* ... */ }
+  // Create a weighted edge (u, v).
+  Edge(int u, int v, int weight) { /* ... */ }
 }
 
 class DisjointSet {
-    // Create disjoint set of n elements.
-    DisjointSet(int n) { /* ... */ }
+  // Create disjoint set of n elements.
+  DisjointSet(int n) { /* ... */ }
 
-    // Get the root of the set containing u.
-    int find(int u) { /* ... */ }
+  // Get the root of the set containing u.
+  int find(int u) { /* ... */ }
 
-    // Returns true if union was successful.
-    boolean union(int u, int v) { /* ... */ }
+  // Returns true if union was successful.
+  boolean union(int u, int v) { /* ... */ }
 }
 ```
 
@@ -172,22 +172,22 @@ original algorithm.
 
 ```java
 List<Edge> maxWidthSpanningTree(int n, List<Edge> T) {
-    T.sort((e1, e2) -> e2.weight - e1.weight);
+  T.sort((e1, e2) -> e2.weight - e1.weight);
 
-    List<Edge> result = new ArrayList<>();
-    DisjointSet set = new DisjointSet(n);
+  List<Edge> result = new ArrayList<>();
+  DisjointSet set = new DisjointSet(n);
 
-    for (Edge e : T) {
-        if (set.find(e.u) == set.find(e.v)) {
-            continue;
-        }
-        set.union(e.u, e.v);
-        result.add(e);
-        if (result.size() == n - 1) {
-            break;
-        }
+  for (Edge e : T) {
+    if (set.find(e.u) == set.find(e.v)) {
+      continue;
     }
-    return result;
+    set.union(e.u, e.v);
+    result.add(e);
+    if (result.size() == n - 1) {
+      break;
+    }
+  }
+  return result;
 }
 ```
 
@@ -222,23 +222,23 @@ tree.
 
 ```java
 List<Edge> createMstWithEdge(int n, List<Edge> T, Edge newEdge) {
-    List<Edge> combined = new ArrayList<>(T);
-    combined.add(newEdge);
-    combined.sort((e1, e2) -> e1.weight - e2.weight);
+  List<Edge> combined = new ArrayList<>(T);
+  combined.add(newEdge);
+  combined.sort((e1, e2) -> e1.weight - e2.weight);
 
-    List<Edge> result = new ArrayList<>();
-    DisjointSet union = new DisjointSet(n);
+  List<Edge> result = new ArrayList<>();
+  DisjointSet union = new DisjointSet(n);
 
-    for (Edge e : combined) {
-        if (!union.union(e.u, e.v)) {
-            continue;
-        }
-        result.add(e);
-        if (result.size() == n - 1) {
-            break;
-        }
+  for (Edge e : combined) {
+    if (!union.union(e.u, e.v)) {
+      continue;
     }
-    return result;
+    result.add(e);
+    if (result.size() == n - 1) {
+      break;
+    }
+  }
+  return result;
 }
 ```
 
@@ -249,16 +249,16 @@ be converted to an adjacency list for easier traversal and modification.
 
 ```java
 List<List<Edge>> buildAdjacencyList(int n, List<Edge> T) {
-    List<List<Edge>> result = new ArrayList<>();
-    for (int i = 0; i < n; i++) {
-        result.add(new ArrayList<>());
-    }
+  List<List<Edge>> result = new ArrayList<>();
+  for (int i = 0; i < n; i++) {
+    result.add(new ArrayList<>());
+  }
 
-    for (Edge e : T) {
-        result.get(e.u).add(e);
-        result.get(e.v).add(e);
-    }
-    return result;
+  for (Edge e : T) {
+    result.get(e.u).add(e);
+    result.get(e.v).add(e);
+  }
+  return result;
 }
 ```
 
@@ -267,51 +267,51 @@ replace with the new edge.
 
 ```java
 boolean updateMstWithEdge(int n, List<List<Edge>> T, Edge newEdge) {
-    int[] parents = new int[n];
-    Edge[] parentEdges = new Edge[n];
-    boolean[] visits = new boolean[n];
-    Arrays.fill(parents, -1);
+  int[] parents = new int[n];
+  Edge[] parentEdges = new Edge[n];
+  boolean[] visits = new boolean[n];
+  Arrays.fill(parents, -1);
 
-    Stack<Integer> stack = new Stack<>();
-    stack.push(newEdge.u);
-    visits[newEdge.u] = true;
-    while (!stack.isEmpty()) {
-        int current = stack.pop();
-        if (current == newEdge.v) {
-            break;
-        }
-        for (Edge e : T.get(current)) {
-            int next = e.u == current ? e.v : e.u;
-            if (visits[next]) {
-                continue;
-            }
-            visits[next] = true;
-            parents[next] = current;
-            parentEdges[next] = e;
-            stack.push(next);
-        }
+  Stack<Integer> stack = new Stack<>();
+  stack.push(newEdge.u);
+  visits[newEdge.u] = true;
+  while (!stack.isEmpty()) {
+    int current = stack.pop();
+    if (current == newEdge.v) {
+      break;
     }
+    for (Edge e : T.get(current)) {
+      int next = e.u == current ? e.v : e.u;
+      if (visits[next]) {
+        continue;
+      }
+      visits[next] = true;
+      parents[next] = current;
+      parentEdges[next] = e;
+      stack.push(next);
+    }
+  }
 
-    Edge maxEdge;
-    int maxWidth = Integer.MIN_VALUE;
-    int current = newEdge.v;
-    while (current != newEdge.u) {
-        Edge e = parentEdges[current];
-        if (e.weight > maxWidth) {
-            maxWidth = e.weight;
-            maxEdge = e;
-        }
-        current = parents[current];
+  Edge maxEdge;
+  int maxWidth = Integer.MIN_VALUE;
+  int current = newEdge.v;
+  while (current != newEdge.u) {
+    Edge e = parentEdges[current];
+    if (e.weight > maxWidth) {
+      maxWidth = e.weight;
+      maxEdge = e;
     }
+    current = parents[current];
+  }
 
-    if (newEdge.weight >= maxWidth) {
-        return false;
-    }
-    T.get(maxEdge.u).remove(maxEdge);
-    T.get(maxEdge.v).remove(maxEdge);
-    T.get(newEdge.u).add(newEdge);
-    T.get(newEdge.v).add(newEdge);
-    return true;
+  if (newEdge.weight >= maxWidth) {
+    return false;
+  }
+  T.get(maxEdge.u).remove(maxEdge);
+  T.get(maxEdge.v).remove(maxEdge);
+  T.get(newEdge.u).add(newEdge);
+  T.get(newEdge.v).add(newEdge);
+  return true;
 }
 ```
 
