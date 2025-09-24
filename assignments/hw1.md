@@ -59,11 +59,17 @@ is at least $2 . \frac{1}{2} . \frac{n}{3}$.
 
 $$
 \begin{align}
-  r &= n - \left(\left\lceil \frac{g}{2} \right\rceil . \frac{1}{2} . \frac{n}{g}\right) \\
-  &= n - \left(2 . \frac{1}{2} . \frac{n}{3}\right) \\
+  r &= n - \left(
+    \left\lceil \frac{g}{2}
+      \right\rceil \cdot \frac{1}{2}
+      \cdot \frac{n}{g}\right
+  ) \\
+  &= n - \left(2 \cdot \frac{1}{2} \cdot \frac{n}{3}\right) \\
   &= n - \frac{n}{3} \\
   &= \frac{2n}{3} \\
-  T(n) &= \underbrace{T(\frac{n}{3}) + T(\frac{2n}{3})}_\textsf{subproblems} + O(n) \\
+
+  T(n) &= \underbrace{T(\frac{n}{3}) + T(\frac{2n}{3})}_\textsf{subproblems} +
+    O(n) \\
   &= \frac{1}{3} + \frac{2}{3} \\
   &= 1 = 1 \\
   &= \mathbf{O(n \lg(n))}
@@ -75,11 +81,17 @@ of 7:
 
 $$
 \begin{align}
-  r &= n - \left(\left\lceil \frac{g}{2} \right\rceil . \frac{1}{2} . \frac{n}{g}\right) \\
-  &= n - \left(4 . \frac{1}{2} . \frac{n}{7}\right) \\
+  r &= n - \left(
+    \left\lceil \frac{g}{2}
+      \right\rceil \cdot \frac{1}{2}
+      \cdot \frac{n}{g}\right
+  ) \\
+  &= n - \left(4 \cdot \frac{1}{2} \cdot \frac{n}{7}\right) \\
   &= n - \frac{2n}{7} \\
   &= \frac{5n}{7} \\
-  T(n) &= \underbrace{T(\frac{n}{7}) + T(\frac{5n}{7})}_\textsf{subproblems} + O(n) \\
+
+  T(n) &= \underbrace{T(\frac{n}{7}) + T(\frac{5n}{7})}_\textsf{subproblems} +
+    O(n) \\
   &= \frac{1}{7} + \frac{5}{7} \\
   &= \frac{6}{7} < 1 \\
   &= \mathbf{O(n)}
@@ -110,9 +122,10 @@ smallest weight $w(e) < w(e_2)$:
 $$
 \begin{align}
   w(e) - w(e_2) &< 0 \\
+
   W(T_2) &= W(T) + w(e) - w(e_2) \\
   &= W(T) - 1 \ldots \\
-  W(T_2) &< W(T)
+  \mathbf{W(T_2)} &< \mathbf{W(T)}
 \end{align}
 $$
 
@@ -123,9 +136,10 @@ When there are two minimum weight edges crossing the cut $(e_1, e_2)$:
 $$
 \begin{align}
   w(e_1) &= w(e_2) \\
+
   W(T_2) &= W(T) + w(e_1) - w(e_2) \\
   &= W(T) + 0 \\
-  W(T_2) &= W(T)
+  \mathbf{W(T_2)} &= \mathbf{W(T)}
 \end{align}
 $$
 
@@ -196,9 +210,9 @@ $m = \lvert E \rvert$.
 
 $$
 \begin{align}
-  \textsf{sorting} + \textsf{union-find loops} &= \\
-  \underbrace{O(m \lg(m))}_\textsf{dominant} + O(m . \alpha(n)) &= \\
-  O(m \lg(m))
+  T(\textsf{sorting}) + T(\textsf{union-find loops}) &=
+    \underbrace{O(m \lg(m))}_\textsf{dominant} + O(m \cdot \alpha(n)) \\
+  &= \mathbf{O(m \lg(m))}
 \end{align}
 $$
 
