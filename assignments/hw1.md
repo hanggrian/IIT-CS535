@@ -51,8 +51,60 @@ Therefore, the theorem holds for all three cases.
   median in each group, followed by two recursive calls (with some work between
   them). Analyze the running time for two variants of this algorithm, where the
   groups are of size 3, and of size 7 respectively.
+>
+> > **SELECT Algorithm**
+> >
+> > The `SELECT` algorithm determines the $i$th smallest of an input array of $n$
+    elements by executing the following steps:
+> >
+> > 1.  Divide the $n$ elements of the input array into $\lfloor n / 5 \rfloor$
+        groups of 5 elements each and at most one group made up of the remaining
+        $n \mod 5$ elements.
+> > 1.  Find the median of each of the $\lceil n / 5 \rceil$ groups by insertion
+        sorting the elements of each group (of which there are 5 at most) and
+        taking its middle element. (If the group has an even number of elements,
+        take the larger of the two medians.)
+> > 1.  Use `SELECT` recursively to find the median $x$ of the
+        $\lceil n / 5 \rceil$ medians found in step 2.
+> > 1.  Partition the input array around the median-of-median $x$ using a
+        modified version of `PARTITION`. Let $k$ be the number of elements on
+        the low side of the partition, so that $n - k$ is the number of elements
+        on the high side.
+> > 1.  Use `SELECT` recursively to find the $i$th smallest element on the low
+        side if $i \leq k$, or the ($i - k$)th smallest element on the high if
+        $i > k$.
+> >
+> > ```
+> > PARTITION(A, p, q, r)
+> > 1.  x = A[p]
+> > 2.  left = q + 1
+> > 3.  right = p
+> > 4.  while TRUE
+> > 5.    /* Invariant: A[right] = x
+> > 6.    /* Invariant: right ≤ left
+> > 7.    /* Invariant: A[p] ≤ x, A[p + 1] ≤ x, . . . , A[right] ≤ x
+> > 8.    /* Invariant: A[left] ≥ x , A[left + 1 ] ≥ x , . . . A[q] ≥ x
+> > 9.    repeat left = left − 1
+> > 10.   until A[left] <= x
+> > 11.   if left = right
+> > 12.     return(r = left)
+> > 13.   else
+> > 14.     A[right] = A[left]
+> > 15.     A[left] = x
+> > 16.   /* Invariant: A[left] = x
+> > 17.   /* Invariant: right ≤ left
+> > 18.   /* Invariant: A[p] ≤ x, A[p + 1] ≤ x, . . . , A[right] ≤ x
+> > 19.   /* Invariant: A[left] ≥ x , A[left + 1 ] ≥ x , . . . A[q] ≥ x
+> > 20.   repeat right = right + 1
+> > 21.   until A[right] >= x
+> > 22.   if left = right
+> > 23.     return(r = left)
+> > 24.   else
+> > 25.     A[left] = A[right]
+> > 26.     A[right] = x
+> > ```
 
-The SELECT algorithm can be described by the recurrence:
+The `SELECT` algorithm can be described by the recurrence:
 $T(n) = T(\frac{n}{g}) + T(r) + O(n)$, where $g$ is the group size and $r$ is
 the recursive call on partition. When group size $g$ is 3, the median of medians
 is at least $2 . \frac{1}{2} . \frac{n}{3}$.

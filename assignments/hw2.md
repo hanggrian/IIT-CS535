@@ -31,6 +31,15 @@ traverses the left child until it no longer has a left child. For
 `TREE-SUCCESSOR`, it calls `TREE-MINIMUM` on the node’s right child or traverses
 the parent until one is found where its left subtree includes the input node.
 
+```mermaid
+graph LR
+  A((1)) --> B((2))
+  B --> C((3))
+  C --> D((4))
+  D --> E((5))
+  E --> F((6))
+```
+
 In a completely unbalanced BST, where each node has only one right child until
 it is a leaf, the initial `TREE-MINIMUM` call takes $O(n)$ to traverse from leaf
 to root. However, consecutive `TREE-SUCCESSOR` calls are $O(1)$ each, since the
@@ -46,6 +55,15 @@ $$
   &= \mathbf{\Theta(n)}
 \end{align}
 $$
+
+```mermaid
+graph TB
+  A((4)) --> B((2))
+  A --> C((5))
+  B --> D((1))
+  B --> E((3))
+  C --> F((6))
+```
 
 The height of a balanced BST is $\lg(n)$, so `TREE-MINIMUM` takes $O(\lg(n))$
 to traverse from root to leftmost leaf. A `TREE-SUCCESSOR` call can be
@@ -115,6 +133,19 @@ which is the highest key.
 > > 1   return ⌊i/2⌋
 > > ```
 
+```mermaid
+graph TB
+  A((10)) --> B((9))
+  A --> C((7))
+  B --> D((5))
+  B --> E((8))
+  C --> F((1))
+  C --> G((3))
+  D --> H((4))
+  D --> I((2))
+  E --> J((6))
+```
+
 In a binary max-heap, the children nodes are always less than their parent, with
 the root having the maximum value. `EXTRACT-MAX` replaces the root with the last
 child, which is then recursively heapified with `MAX-HEAPIFY` until the heap
@@ -175,6 +206,15 @@ $$
 >
 > Note that $R_0$ has entries that are 1 only on the main diagonal.
 
+```mermaid
+block-beta
+  columns 4
+  space col1("i<sub>1</sub") col2("i<sub>2</sub") col3("i<sub>3</sub")
+  row1("i<sub>1</sub") A["1"] B["0"] C["0"]
+  row2("i<sub>2</sub") D["0"] E["1"] F["0"]
+  row3("i<sub>3</sub") G["0"] H["0"] I["1"]
+```
+
 Transitive closure is defined as matrix that indicates node reachability in a
 directed graph. However, since the next edge $e_i$ is not known before computing
 $R_{i - 1}$, the matrix starts with a diagonal of 1s, which are self nodes.
@@ -182,6 +222,16 @@ $R_{i - 1}$, the matrix starts with a diagonal of 1s, which are self nodes.
 > 1.  Give a series of instances (one for each $n$) such that there exists an
       $i$ with the number of entries $1$'s in $R_i$ being $\Omega(n^2)$ higher
       than the number of entries $1$ in $R_{i - 1}$.
+
+```mermaid
+graph LR
+  A((1)) --> B((2))
+  B --> C((3))
+  C --> D((...))
+  D --> E((n))
+
+  E -.-> A
+```
 
 Consider a chain of linear edges $(1, 2), (2, 3), \ldots, (n - 1, n)$. Each time
 an edge is added, the matrix $R_i$ will only have one additional $1$ value
@@ -199,6 +249,20 @@ $$
   &\gets (n, 1) && \texttt{COUNT}(R_n) &= \mathbf{n^2}
 \end{align}
 $$
+
+```mermaid
+graph LR
+  A((1)) --> B((2))
+  B --> C((3))
+  C --> D((...))
+  D --> E((j))
+
+  F((k + 1)) --> G((k + 2))
+  G --> H((...))
+  H --> I((n))
+
+  E -.-> F
+```
 
 Another instance would be to combine two disjoint sets into a complete graph. To
 maximize the increase to at least $n^2$, both sets should be close to half the
