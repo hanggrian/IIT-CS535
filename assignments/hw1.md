@@ -15,7 +15,7 @@ $$
   &\geq \lg(n!) - \lg(2) \\
   &\geq \underbrace{\lg(n!)}_\textsf{Stirling} - 1 \\
   &\geq \underbrace{n \lg(n)}_\textsf{dominant} - n \lg(e) - 1 \\
-  h &= \mathbf{O(n \lg(n)) \neq O(n)}
+  h &= \mathbf{\Omega(n \lg(n)) \neq O(n)}
 \end{align}
 $$
 
@@ -26,7 +26,7 @@ $$
   h &\geq \lg\left(\frac{n!}{n}\right) \\
   &\geq \underbrace{\lg(n!)}_\textsf{Stirling} - \lg(n) \\
   &\geq \underbrace{n \lg(n)}_\textsf{dominant} - n \lg(e) - \lg(n) \\
-  h &= \mathbf{O(n \lg(n)) \neq O(n)}
+  h &= \mathbf{\Omega(n \lg(n)) \neq O(n)}
 \end{align}
 $$
 
@@ -39,7 +39,7 @@ $$
   &\geq \lg(n!) - n \lg(2) \\
   &\geq \underbrace{\lg(n!)}_\textsf{Stirling} - n . 1 \\
   &\geq \underbrace{n \lg(n)}_\textsf{dominant} - n \\
-  h &= \mathbf{O(n \lg(n)) \neq O(n)}
+  h &= \mathbf{\Omega(n \lg(n)) \neq O(n)}
 \end{align}
 $$
 

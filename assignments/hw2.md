@@ -162,7 +162,7 @@ $n$ is the `A.heap-size`.
 
 $$
 \begin{align}
-  \tilde{O}(\texttt{INSERT}(n)) &= T(n) + \Phi_2(A) - \Phi_1(A) \\
+  \Theta(\texttt{INSERT}(n)) &= T(n) + \Phi_2(A) - \Phi_1(A) \\
   &= O(\lg(n)) + c \cdot (n + 1) \cdot
     \lg(\underbrace{n}_\textsf{dominant} + 1) - c \cdot n \cdot \lg(n) \\
   &= O(\lg(n)) + c \cdot (n + 1) \cdot \lg(n) - c \cdot n \cdot \lg(n) \\
@@ -179,7 +179,7 @@ for the final result to remain non-negative.
 
 $$
 \begin{align}
-  \tilde{O}(\texttt{EXTRACT-MAX}(n)) &= T(n) + \Phi_2(A) - \Phi_1(A) \\
+  \Theta(\texttt{EXTRACT-MAX}(n)) &= T(n) + \Phi_2(A) - \Phi_1(A) \\
   &= O(\lg(n)) + c \cdot (n - 1) \cdot
     \lg(\underbrace{n}_\textsf{dominant} - 1) - c \cdot n \cdot \lg(n) \\
   &= O(\lg(n)) + c \cdot (n - 1) \cdot \lg(n) - c \cdot n \cdot \lg(n) \\
