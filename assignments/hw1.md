@@ -14,8 +14,8 @@ $$
   h &\geq \lg\left(\frac{n!}{2}\right) \\
   &\geq \lg(n!) - \lg(2) \\
   &\geq \underbrace{\lg(n!)}_\textsf{Stirling} - 1 \\
-  &\geq \underbrace{n \lg(n)}_\textsf{dominant} - n \lg(e) - 1 \\
-  h &= \mathbf{\Omega(n \lg(n)) \neq O(n)}
+  &\geq \underbrace{n \cdot \lg(n)}_\textsf{dominant} - n \cdot \lg(e) - 1 \\
+  h &= \mathbf{\Omega(n \cdot \lg(n)) \neq O(n)}
 \end{align}
 $$
 
@@ -25,8 +25,9 @@ $$
 \begin{align}
   h &\geq \lg\left(\frac{n!}{n}\right) \\
   &\geq \underbrace{\lg(n!)}_\textsf{Stirling} - \lg(n) \\
-  &\geq \underbrace{n \lg(n)}_\textsf{dominant} - n \lg(e) - \lg(n) \\
-  h &= \mathbf{\Omega(n \lg(n)) \neq O(n)}
+  &\geq \underbrace{n \cdot \lg(n)}_\textsf{dominant} -
+    n \cdot \lg(e) - \lg(n) \\
+  h &= \mathbf{\Omega(n \cdot \lg(n)) \neq O(n)}
 \end{align}
 $$
 
@@ -36,10 +37,10 @@ $$
 \begin{align}
   h &\geq \lg\left(\frac{n!}{2^n}\right) \\
   &\geq \lg(n!) - \lg(2^n) \\
-  &\geq \lg(n!) - n \lg(2) \\
-  &\geq \underbrace{\lg(n!)}_\textsf{Stirling} - n . 1 \\
-  &\geq \underbrace{n \lg(n)}_\textsf{dominant} - n \\
-  h &= \mathbf{\Omega(n \lg(n)) \neq O(n)}
+  &\geq \lg(n!) - n \cdot \lg(2) \\
+  &\geq \underbrace{\lg(n!)}_\textsf{Stirling} - n \cdot 1 \\
+  &\geq \underbrace{n \cdot \lg(n)}_\textsf{dominant} - n \\
+  h &= \mathbf{\Omega(n \cdot \lg(n)) \neq O(n)}
 \end{align}
 $$
 
@@ -54,8 +55,8 @@ Therefore, the theorem holds for all three cases.
 >
 > > **SELECT Algorithm**
 > >
-> > The `SELECT` algorithm determines the $i$th smallest of an input array of $n$
-    elements by executing the following steps:
+> > The `SELECT` algorithm determines the $i$th smallest of an input array of
+    $n$ elements by executing the following steps:
 > >
 > > 1.  Divide the $n$ elements of the input array into $\lfloor n / 5 \rfloor$
         groups of 5 elements each and at most one group made up of the remaining
@@ -76,32 +77,32 @@ Therefore, the theorem holds for all three cases.
 > >
 > > ```
 > > PARTITION(A, p, q, r)
-> > 1.  x = A[p]
-> > 2.  left = q + 1
-> > 3.  right = p
-> > 4.  while TRUE
-> > 5.    /* Invariant: A[right] = x
-> > 6.    /* Invariant: right ≤ left
-> > 7.    /* Invariant: A[p] ≤ x, A[p + 1] ≤ x, . . . , A[right] ≤ x
-> > 8.    /* Invariant: A[left] ≥ x , A[left + 1 ] ≥ x , . . . A[q] ≥ x
-> > 9.    repeat left = left − 1
-> > 10.   until A[left] <= x
-> > 11.   if left = right
-> > 12.     return(r = left)
-> > 13.   else
-> > 14.     A[right] = A[left]
-> > 15.     A[left] = x
-> > 16.   /* Invariant: A[left] = x
-> > 17.   /* Invariant: right ≤ left
-> > 18.   /* Invariant: A[p] ≤ x, A[p + 1] ≤ x, . . . , A[right] ≤ x
-> > 19.   /* Invariant: A[left] ≥ x , A[left + 1 ] ≥ x , . . . A[q] ≥ x
-> > 20.   repeat right = right + 1
-> > 21.   until A[right] >= x
-> > 22.   if left = right
-> > 23.     return(r = left)
-> > 24.   else
-> > 25.     A[left] = A[right]
-> > 26.     A[right] = x
+> > 1   x = A[p]
+> > 2   left = q + 1
+> > 3   right = p
+> > 4   while TRUE
+> > 5     /* Invariant: A[right] = x
+> > 6     /* Invariant: right ≤ left
+> > 7     /* Invariant: A[p] ≤ x, A[p + 1] ≤ x, . . . , A[right] ≤ x
+> > 8     /* Invariant: A[left] ≥ x , A[left + 1 ] ≥ x , . . . A[q] ≥ x
+> > 9     repeat left = left − 1
+> > 10    until A[left] <= x
+> > 11    if left = right
+> > 12      return(r = left)
+> > 13    else
+> > 14      A[right] = A[left]
+> > 15      A[left] = x
+> > 16    /* Invariant: A[left] = x
+> > 17    /* Invariant: right ≤ left
+> > 18    /* Invariant: A[p] ≤ x, A[p + 1] ≤ x, . . . , A[right] ≤ x
+> > 19    /* Invariant: A[left] ≥ x , A[left + 1 ] ≥ x , . . . A[q] ≥ x
+> > 20    repeat right = right + 1
+> > 21    until A[right] >= x
+> > 22    if left = right
+> > 23      return(r = left)
+> > 24    else
+> > 25      A[left] = A[right]
+> > 26      A[right] = x
 > > ```
 
 The `SELECT` algorithm can be described by the recurrence:
@@ -118,7 +119,7 @@ $$
   ) \\
   &= n - \left(2 \cdot \frac{1}{2} \cdot \frac{n}{3}\right) \\
   &= n - \frac{n}{3} \\
-  &= \frac{2n}{3} \\
+  &= \mathbf{\frac{2n}{3}} \\
 
   T(n) &= \underbrace{T(\frac{n}{3}) + T(\frac{2n}{3})}_\textsf{subproblems} +
     O(n) \\
@@ -140,7 +141,7 @@ $$
   ) \\
   &= n - \left(4 \cdot \frac{1}{2} \cdot \frac{n}{7}\right) \\
   &= n - \frac{2n}{7} \\
-  &= \frac{5n}{7} \\
+  &= \mathbf{\frac{5n}{7}} \\
 
   T(n) &= \underbrace{T(\frac{n}{7}) + T(\frac{5n}{7})}_\textsf{subproblems} +
     O(n) \\
@@ -263,8 +264,8 @@ $m = \lvert E \rvert$.
 $$
 \begin{align}
   T(\textsf{sorting}) + T(\textsf{union-find loops}) &=
-    \underbrace{O(m \lg(m))}_\textsf{dominant} + O(m \cdot \alpha(n)) \\
-  &= \mathbf{O(m \lg(m))}
+    \underbrace{O(m \cdot \lg(m))}_\textsf{dominant} + O(m \cdot \alpha(n)) \\
+  &= \mathbf{O(m \cdot \lg(m))}
 \end{align}
 $$
 

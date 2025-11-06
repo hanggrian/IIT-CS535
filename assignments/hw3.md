@@ -75,7 +75,7 @@ $$
   S_1(d) &\leq n \\
   2^d &\leq n \\
   d &\leq \lg(n) \\
-  d &= O(\lg(n))
+  d &= \mathbf{O(\lg(n))}
 \end{align}
 $$
 
@@ -104,7 +104,7 @@ $$
   c^d &\leq n \\
   d &\leq \frac{\lg(n)}{\lg(c)} \\
   &\leq \frac{1}{\lg(c)} \cdot \underbrace{\lg(n)}_{dominant} \\
-  d &= O(\lg(n))
+  d &= \mathbf{O(\lg(n))}
 \end{align}
 $$
 
@@ -276,7 +276,7 @@ $$
     T(\texttt{EXTRACT-MIN}) +
     T(\texttt{DECREASE-KEY})) \\
   &> c \cdot (\underbrace{n}_\textsf{dominant} + \lg(n) + \lg(n)) \\
-  &> c \cdot n
+  &> \mathbf{c \cdot n}
 \end{align}
 $$
 

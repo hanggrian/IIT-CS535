@@ -62,7 +62,10 @@ graph TB
   A --> C((5))
   B --> D((1))
   B --> E((3))
-  C --> F((6))
+  C ~~~ F:::hidden
+  C --> G((6))
+
+  classDef hidden display: none;
 ```
 
 The height of a balanced BST is $\lg(n)$, so `TREE-MINIMUM` takes $O(\lg(n))$
@@ -144,6 +147,9 @@ graph TB
   D --> H((4))
   D --> I((2))
   E --> J((6))
+  E ~~~ K:::hidden
+
+  classDef hidden display: none;
 ```
 
 In a binary max-heap, the children nodes are always less than their parent, with
@@ -162,7 +168,7 @@ $n$ is the `A.heap-size`.
 
 $$
 \begin{align}
-  \Theta(\texttt{INSERT}(n)) &= T(n) + \Phi_2(A) - \Phi_1(A) \\
+  \hat{c}(\texttt{INSERT}(n)) &= T(n) + \Phi_2(A) - \Phi_1(A) \\
   &= O(\lg(n)) + c \cdot (n + 1) \cdot
     \lg(\underbrace{n}_\textsf{dominant} + 1) - c \cdot n \cdot \lg(n) \\
   &= O(\lg(n)) + c \cdot (n + 1) \cdot \lg(n) - c \cdot n \cdot \lg(n) \\
@@ -179,7 +185,7 @@ for the final result to remain non-negative.
 
 $$
 \begin{align}
-  \Theta(\texttt{EXTRACT-MAX}(n)) &= T(n) + \Phi_2(A) - \Phi_1(A) \\
+  \hat{c}(\texttt{EXTRACT-MAX}(n)) &= T(n) + \Phi_2(A) - \Phi_1(A) \\
   &= O(\lg(n)) + c \cdot (n - 1) \cdot
     \lg(\underbrace{n}_\textsf{dominant} - 1) - c \cdot n \cdot \lg(n) \\
   &= O(\lg(n)) + c \cdot (n - 1) \cdot \lg(n) - c \cdot n \cdot \lg(n) \\
@@ -355,14 +361,14 @@ $$
 For $m$ calls to `ADD`, the outer loop in line 1 iterates $n$ times, costing
 $\Omega(n \cdot m)$ total. The line 3 inner loop executes only when an entry can
 be converted to $1$. Since the matrix starts at diagonal $1$ values, there are
-$n(n - 1)$ convertible entries, resulting in $O(n^3)$ total.
+$n \cdot (n - 1)$ convertible entries, resulting in $O(n^3)$ total.
 
 $$
 \begin{align}
   m \cdot T(\texttt{ADD}) &= T(\textsf{line 1}) + T(\textsf{line 3}) \\
-  &= \Theta(nm) + O(n \cdot n(\underbrace{n}_\textsf{dominant} - 1)) \\
-  &= \Theta(nm) + O(n \cdot n \cdot n) \\
-  &= \Theta(nm) + O(n^3) \\
-  &= \mathbf{O(nm + n^3)}
+  &= \Theta(n \cdot m) + O(n \cdot n(\underbrace{n}_\textsf{dominant} - 1)) \\
+  &= \Theta(n \cdot m) + O(n \cdot n \cdot n) \\
+  &= \Theta(n \cdot m) + O(n^3) \\
+  &= \mathbf{O(n \cdot m + n^3)}
 \end{align}
 $$
