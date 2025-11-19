@@ -28,7 +28,7 @@
 A node in a binary search tree and its right subtree are always greater than its
 left subtree. To find the minimum node of BST, `TREE-MINIMUM` recursively
 traverses the left child until it no longer has a left child. For
-`TREE-SUCCESSOR`, it calls `TREE-MINIMUM` on the node’s right child or traverses
+`TREE-SUCCESSOR`, it calls `TREE-MINIMUM` on the node's right child or traverses
 the parent until one is found where its left subtree includes the input node.
 
 ```mermaid
@@ -202,13 +202,12 @@ $$
 > We describe below a data structure that maintains the transitive closure of a
   directed graph while arcs (directed edges) are added to the graph.
 >
-> Formally, a set of vertices $V$ is given (with $\lvert V \rvert = n$), and
-  arcs $e_1, e_2, \ldots, e_m$ become available one by one ($e_i$ is not known
-  before computing $R_{i - 1}$, defined below). Let $G_i = (V, E)$, where
-  $E_0 = \Phi$ and $E_i = E_{i - 1} \cup e_i$. Let $R_i$, a $n \times n$
-  matrix, have $R_i[u, v] = 1$ if $u$ has a directed path to $v$, and
-  $R_i[u, v] = 0$ otherwise. Thus $R_i$ stores the transitive closure of
-  $G_i$.
+> Formally, a set of vertices $V$ is given (with $|V| = n$), and arcs
+  $e_1, e_2, \ldots, e_m$ become available one by one ($e_i$ is not known before
+  computing $R_{i - 1}$, defined below). Let $G_i = (V, E)$, where $E_0 = \Phi$
+  and $E_i = E_{i - 1} \cup e_i$. Let $R_i$, a $n \times n$ matrix, have
+  $R_i[u, v] = 1$ if $u$ has a directed path to $v$, and $R_i[u, v] = 0$
+  otherwise. Thus $R_i$ stores the transitive closure of $G_i$.
 >
 > Note that $R_0$ has entries that are 1 only on the main diagonal.
 

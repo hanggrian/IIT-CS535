@@ -299,7 +299,7 @@ $u_k$ will have the same color as the first vertex $u_1$. Thus, the condition
 > 1.  Within the same time bounds, output such a sequence if it exists.
 
 Each currency can be represented as a vertex in a directed graph, where an edge
-from vertex $c_i$ to $c_j$ has weight $w(i, j) = \lg(Q[i, j])$. We can check
+from vertex $c_i \to c_j$ has weight $w(i, j) = \lg(Q[i, j])$. We can check
 whether there is a profitable cycle by multiplying the exchange rates along the
 cycle.
 

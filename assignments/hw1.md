@@ -212,12 +212,12 @@ connected nodes.
 
 ```java
 class Edge {
-  int u;
-  int v;
-  int weight;
+  int u; // starting vertex
+  int v; // ending vertex
+  int w; // edge weight
 
   // Create a weighted edge (u, v).
-  Edge(int u, int v, int weight) { /* ... */ }
+  Edge(int u, int v, int w) { /* ... */ }
 }
 
 class DisjointSet {
@@ -239,7 +239,7 @@ original algorithm.
 
 ```java
 List<Edge> maxWidthSpanningTree(int n, List<Edge> T) {
-  T.sort((e1, e2) -> e2.weight - e1.weight);
+  T.sort((e1, e2) -> e2.w - e1.w);
 
   List<Edge> result = new ArrayList<>();
   DisjointSet set = new DisjointSet(n);
@@ -258,8 +258,7 @@ List<Edge> maxWidthSpanningTree(int n, List<Edge> T) {
 }
 ```
 
-Calculating the running time, considering $n = \lvert V \rvert$ and
-$m = \lvert E \rvert$.
+Calculating the running time, considering $n = |V|$ and $m = |E|$.
 
 $$
 \begin{align}
@@ -280,8 +279,8 @@ edges would have been collected earlier in the sorted list.
   adjacency list representation. Add an edge $e'$ to $E$ of cost $we'$,
   obtaining a new weighted graph $G' = (V, E \cup {e'}, w)$. Give an efficient
   algorithm to compute the minimum spanning tree in $G'$. Present pseudocode,
-  analyize the running time and prove correctness. Give a
-  $O(\lvert V \rvert)$-algorithm for full credit.
+  analyze the running time and prove correctness. Give a $O(|V|)$-algorithm for
+  full credit.
 
 The function below uses Kruskal's algorithm to create a new MST with an extra
 edge. When a cycle is found, the largest weight edge is removed from the final
@@ -291,7 +290,7 @@ tree.
 List<Edge> createMstWithEdge(int n, List<Edge> T, Edge newEdge) {
   List<Edge> combined = new ArrayList<>(T);
   combined.add(newEdge);
-  combined.sort((e1, e2) -> e1.weight - e2.weight);
+  combined.sort((e1, e2) -> e1.w - e2.w);
 
   List<Edge> result = new ArrayList<>();
   DisjointSet union = new DisjointSet(n);
@@ -310,9 +309,9 @@ List<Edge> createMstWithEdge(int n, List<Edge> T, Edge newEdge) {
 ```
 
 Like the original Kruskal's algorithm, the running time is $O(m \lg(m))$ where
-$m = \lvert E \rvert$. This solution is not optimal because it recreates the MST
-instead of modifying the input tree. To modify existing tree, MST $T$ needs to
-be converted to an adjacency list for easier traversal and modification.
+$m = |E|$. This solution is not optimal because it recreates the MST instead of
+modifying the input tree. To modify existing tree, MST $T$ needs to be converted
+to an adjacency list for easier traversal and modification.
 
 ```java
 List<List<Edge>> buildAdjacencyList(int n, List<Edge> T) {
@@ -364,14 +363,14 @@ boolean updateMstWithEdge(int n, List<List<Edge>> T, Edge newEdge) {
   int current = newEdge.v;
   while (current != newEdge.u) {
     Edge e = parentEdges[current];
-    if (e.weight > maxWidth) {
-      maxWidth = e.weight;
+    if (e.w > maxWidth) {
+      maxWidth = e.w;
       maxEdge = e;
     }
     current = parents[current];
   }
 
-  if (newEdge.weight >= maxWidth) {
+  if (newEdge.w >= maxWidth) {
     return false;
   }
   T.get(maxEdge.u).remove(maxEdge);
@@ -383,4 +382,4 @@ boolean updateMstWithEdge(int n, List<List<Edge>> T, Edge newEdge) {
 ```
 
 The running time is dominated by the DFS traversal, which is $O(n)$ where
-$n = \lvert V \rvert$.
+$n = |V|$.
