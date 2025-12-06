@@ -144,7 +144,8 @@ use some non-tree edge.
 
 $$
 \begin{align}
-  T &= T(\texttt{DIJKSTRA(G)}) + T(\textsf{iterating non-tree edges}) \\
+  T(\texttt{FIND-OPTIMAL-CYCLE}) &=
+    T(\texttt{DIJKSTRA(G)}) + T(\textsf{iterating non-tree edges}) \\
   &= \underbrace{O(|V| \cdot \lg(|V|) + |E|)}_\textsf{dominant}
     + O(|E| - |V| - 1) \\
   &= \mathbf{O(|V| \cdot \lg(|V|) + |E|)}
@@ -259,7 +260,7 @@ time to visit each vertex and edge at most once.
 
 $$
 \begin{align}
-  T &=
+  T(\texttt{UPDATE-MAX-FLOW}) &=
     T(\textsf{residual graph}) +
     T(\textsf{find augment}) +
     T(\textsf{update flow}) \\

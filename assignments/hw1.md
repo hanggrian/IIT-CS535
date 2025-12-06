@@ -217,18 +217,18 @@ class Edge {
   int w; // edge weight
 
   // Create a weighted edge (u, v).
-  Edge(int u, int v, int w) { /* ... */ }
+  Edge(int u, int v, int w);
 }
 
 class DisjointSet {
   // Create disjoint set of n elements.
-  DisjointSet(int n) { /* ... */ }
+  DisjointSet(int n);
 
   // Get the root of the set containing u.
-  int find(int u) { /* ... */ }
+  int find(int u);
 
   // Returns true if union was successful.
-  boolean union(int u, int v) { /* ... */ }
+  boolean union(int u, int v);
 }
 ```
 
