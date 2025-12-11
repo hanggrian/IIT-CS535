@@ -137,7 +137,7 @@ $$
     \underbrace{\lg(n)}_\textsf{dominant} \\
   &= \mathbf{\Theta(n \cdot \lg(n))} \\
 
-  T &= \
+  T(\textsf{total}) &= \
     T(\texttt{MAKE-SET}\textsf{s}) +
     T(\texttt{UNION}\textsf{s}) + \
     T(\texttt{FIND}\textsf{s}) \\
